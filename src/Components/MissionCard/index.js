@@ -40,7 +40,7 @@ function MissionCard(props) {
       <MissionName>{`${props.mission.mission_name} #${props.mission.flight_number}`}</MissionName>
       <Label>{`Mission Ids : `}</Label>
       <MissionIdList>
-        {props.mission.mission_id > 0 ? (
+        {props.mission.mission_id.length > 0 ? (
           props.mission.mission_id.map((id) => (
             <MissionId key={id}>{id}</MissionId>
           ))
