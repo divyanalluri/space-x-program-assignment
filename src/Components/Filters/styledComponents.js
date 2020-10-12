@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex: 1;
-  width: 200px;
-  max-height: 700px;
+  width: 210px;
+  max-height: 630px;
   flex-wrap: wrap;
   align-items: center;
   flex-direction: column;
@@ -13,7 +12,8 @@ export const Container = styled.div`
   padding-bottom: 20px;
   box-sizing: border-box;
   border-radius: 7px;
-  margin-top: 5px;
+  margin-right: 10px;
+  margin-bottom: 20px;
 `;
 
 export const Heading = styled.h3`
@@ -26,4 +26,5 @@ export const YearsContainer = styled.div`
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
+  margin-bottom: 10px;
 `;

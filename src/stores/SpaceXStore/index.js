@@ -4,6 +4,8 @@ class SpaceXStore {
   @observable isSelectedYear;
   @observable launchValue;
   @observable landingValue;
+  @observable missionsList;
+  @observable currentURL;
   constructor() {
     this.init();
   }
@@ -12,22 +14,38 @@ class SpaceXStore {
     this.isSelectedYear = "";
     this.launchValue = "";
     this.landingValue = "";
+    this.missionsList = null;
+    this.currentURL = "";
   }
 
   @action.bound
   setSelectedYear(value) {
-    console.log(value);
-    this.isSelectedYear = value;
+    if (this.isSelectedYear !== value) {
+      this.isSelectedYear = value;
+    } else {
+      this.isSelectedYear = "";
+    }
+    this.fetchData();
   }
 
   @action.bound
   setLaunchValue(value) {
-    this.launchValue = value;
+    if (this.launchValue !== value) {
+      this.launchValue = value;
+    } else {
+      this.launchValue = "";
+    }
+    this.fetchData();
   }
 
   @action.bound
   setLandingValue(value) {
-    this.landingValue = value;
+    if (this.landingValue !== value) {
+      this.landingValue = value;
+    } else {
+      this.landingValue = "";
+    }
+    this.fetchData();
   }
 
   getLaunchValues = () => {
@@ -53,6 +71,40 @@ class SpaceXStore {
       2020,
     ];
   };
+
+  @action.bound
+  setData(response) {
+    this.missionsList = response;
+  }
+
+  @action.bound
+  getURL() {
+    let url = `https://api.spaceXdata.com/v3/launches?limit=100`;
+    if (this.launchValue) {
+      const isLaunchedSuccessfully = this.launchValue === "True" ? true : false;
+      url = url + `&launch_success=${isLaunchedSuccessfully}`;
+    }
+    if (this.landingValue) {
+      const isLandedSuccessfully = this.landingValue === "True" ? true : false;
+      url = url + `&land_success=${isLandedSuccessfully}`;
+    }
+    if (this.isSelectedYear) {
+      url = url + `&launch_year=${this.isSelectedYear}`;
+    }
+
+    return url;
+  }
+
+  async fetchData() {
+    const url = this.getURL();
+    if (url !== this.currentURL) {
+      this.missionsList = null;
+      this.currentURL = url;
+      const res = await fetch(url);
+      const response = await res.json();
+      this.setData(response);
+    }
+  }
 }
 
 export default SpaceXStore;

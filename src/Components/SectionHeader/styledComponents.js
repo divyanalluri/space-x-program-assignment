@@ -8,7 +8,6 @@ export const Title = styled.span``;
 
 export const Container = styled.div`
   display: flex;
-  flex: 1;
   align-items: center;
   flex-direction: column;
 `;

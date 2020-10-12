@@ -5,7 +5,7 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   padding: 8px 18px;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: ${(props) => (props.isSelected ? "#54a806" : "#cbf5a3")};
   border: none;
   box-sizing: border-box;

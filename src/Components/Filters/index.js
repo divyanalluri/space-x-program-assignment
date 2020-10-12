@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import { observable } from "mobx";
 import stores from "../../stores";
 
 import ButtonComponent from "../ButtonComponent";
@@ -10,9 +9,7 @@ import { Container, Heading, YearsContainer } from "./styledComponents.js";
 
 @observer
 class Filters extends Component {
-  @observable title = "hello";
   render() {
-    console.log("filter");
     return (
       <Container>
         <Heading>{"Filters"}</Heading>
@@ -23,7 +20,6 @@ class Filters extends Component {
               key={year}
               text={year}
               onClickButton={(value) => {
-                this.title = "1234";
                 stores.storeInstance.setSelectedYear(value);
               }}
               isSelected={stores.storeInstance.isSelectedYear === year}
@@ -47,7 +43,7 @@ class Filters extends Component {
         <YearsContainer>
           {stores.storeInstance.getLaunchValues().map((value) => (
             <ButtonComponent
-              key={value}
+              key={"launch" + value}
               text={value}
               onClickButton={(value) => {
                 stores.storeInstance.setLandingValue(value);
